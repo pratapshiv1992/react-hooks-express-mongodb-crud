@@ -1,5 +1,5 @@
 import Q from 'q';
-import {Post} from '../../schema';
+import {Post} from '../../schema/index';
 
 const createPost = (text)=> {
     const deferred = Q.defer();

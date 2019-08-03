@@ -1,5 +1,5 @@
 import Q from 'q';
-import {Post} from '../../schema';
+import {Post} from '../../schema/index';
 
 const deletePost = ({id})=>{
     const deferred = Q.defer();

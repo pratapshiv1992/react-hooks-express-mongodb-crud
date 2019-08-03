@@ -1,5 +1,5 @@
 import Q from 'q';
-import {Post} from '../../schema';
+import {Post} from '../../schema/index';
 
 const updatePost = ({id, text, like})=> {
     const deferred = Q.defer();
