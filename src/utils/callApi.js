@@ -12,7 +12,8 @@ const callAPi = ({url, method, data})=> {
                 status: response.status
             })
         ).then(res => {
-            console.log(res.status, res.data)
+            console.log(res.status, res.data);
+            return res;
         })).catch(e => console.log('Oops! something went wrong',e));
 
 }
