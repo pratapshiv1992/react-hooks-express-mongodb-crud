@@ -1,5 +1,5 @@
 const callAPi = ({url, method, data})=> {
-    fetch(url,{
+    return fetch(url,{
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -12,7 +12,6 @@ const callAPi = ({url, method, data})=> {
                 status: response.status
             })
         ).then(res => {
-            console.log(res.status, res.data);
             return res;
         })).catch(e => console.log('Oops! something went wrong',e));
 

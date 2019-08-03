@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import {callAPi} from '../utils/callApi';
 
 const styles = theme => ({
     root: {
@@ -39,14 +39,33 @@ const styles = theme => ({
 });
 
 const CreatePost = (props)=> {
-    const [text, setTextFn] = useState("Hello this is react hook component");
-    const {classes, editMode=true, match:{params:{id}}, history:{ goBack}} = props;
+    const [text, setTextFn] = useState();
+    const {classes, editMode, match:{params:{id}}, history:{ goBack,push}} = props;
 
     useEffect(()=>{
         if(editMode){
             console.log('edit mode');
         }
     },[]);
+
+    const createPost = (e)=>{
+        e.preventDefault();
+        if(text){
+            callAPi({
+                url:"/post/create",
+                method:"post",
+                data:{text}
+            }).then((result)=>{
+                if(result.status){
+                    alert('post added successfully');
+                    push('/');
+                }
+            })
+        }else{
+            alert('Please fill all the required field');
+        }
+
+    }
 
     return (
             <div className={classes.root}>
@@ -58,6 +77,7 @@ const CreatePost = (props)=> {
                         variant="outlined"
                         label={ editMode ? "Update Post" : "Write post"}
                         value={text}
+                        onChange={({target:{value}})=>setTextFn(value)}
                         fullWidth
                         multiline={true}
                         rows={6}
@@ -67,17 +87,34 @@ const CreatePost = (props)=> {
                     { editMode && <Typography variant="h5" component="h5" style={{paddingLeft:"16px"}}> Created on :  {new Date().toLocaleString()}</Typography> }
 
                     { editMode &&
-                    <Button fullWidth variant="contained" color="primary" className={classes.button}  >
-                        {'Update '}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={()=>console.log('plz update post')}
+                    >
+                        Update
                     </Button>
                     }
-                    <Button fullWidth variant="contained" color="primary" className={classes.button}  >
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={editMode ? null : createPost}
+                      disabled = {!text}
+                    >
                         {editMode ? 'DELETE ':'ADD' }
                     </Button>
-                    <Button fullWidth variant="contained" color="secondary" className={classes.button} onClick={()=>goBack()} >
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      className={classes.button}
+                      onClick={()=>goBack()}>
                         GO BACK
                     </Button>
-
                 </form>
             </div>
         );
