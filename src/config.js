@@ -3,7 +3,7 @@
  * @type {{db: string, apiPort: number}}
  */
 const defaultConfig = {
-    db: 'mongodb://localhost:27017/post',
+    db: 'mongodb://localhost:27017/expressMongodbReactDemo',
     apiPort: 4000
 };
 
