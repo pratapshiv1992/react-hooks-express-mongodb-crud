@@ -1,9 +1,21 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import config from './config';
+
 const app = express();
-app.get('/test',(req,res)=>{
-    res.send("hello");
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+mongoose.connect(config.db,(err) => {
+    if (err) {console.log(`[MongoDB] Failed to connect. ${err}`);}
+    else {
+        app.listen(config.apiPort, () => {
+            console.log(`[Server] listening on port ${config.apiPort}`);
+        });
+        console.log(`[MongoDB] connected: ${config.db}`);
+    }
 });
 
-app.listen(3002,()=>{
-    console.log('app running on port 3002');
-})
+export default app;
