@@ -8,7 +8,7 @@ const handleSubmit = (event)=> {
             const result = response.json();
             console.log('---result---',result);
     })
-    .catch(e => console.log('oops ...something went wrong',e));
+    .catch(e => console.log('Oops! something went wrong',e));
 }
 
 handleSubmit()
