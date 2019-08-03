@@ -41,6 +41,10 @@ const styles = theme => ({
 const CreatePost = (props)=> {
     const [text, setTextFn] = useState();
     const {classes, editMode, match:{params:{id}}, history:{ goBack,push}} = props;
+    const params = {
+        url: editMode ? `/post/update/${id}` : "/post/create",
+        method: editMode ? "put" : "post",
+    }
 
     useEffect(()=>{
         if(editMode){
@@ -48,24 +52,24 @@ const CreatePost = (props)=> {
         }
     },[]);
 
-    const createPost = (e)=>{
+    const handleSubmit = (e,{url,method})=>{
         e.preventDefault();
         if(text){
             callAPi({
-                url:"/post/create",
-                method:"post",
+                url,
+                method,
                 data:{text}
             }).then((result)=>{
                 if(result.status){
-                    alert('post added successfully');
+                    alert('operation successfull');
                     push('/');
                 }
             })
         }else{
             alert('Please fill all the required field');
         }
-
     }
+
 
     return (
             <div className={classes.root}>
@@ -92,7 +96,7 @@ const CreatePost = (props)=> {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={()=>console.log('plz update post')}
+                      onClick={(e)=>handleSubmit(e,params)}
                     >
                         Update
                     </Button>
@@ -102,7 +106,7 @@ const CreatePost = (props)=> {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={editMode ? null : createPost}
+                      onClick={(e)=>handleSubmit(e,params)}
                       disabled = {!text}
                     >
                         {editMode ? 'DELETE ':'ADD' }

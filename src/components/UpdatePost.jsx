@@ -1,5 +1,6 @@
 import React from 'react';
+import CreatePost from '../components/CreatePost';
 
-const UpdatePost = (props)=><h1>This is Update Post page...</h1>;
+const UpdatePost = (props)=><CreatePost {...props} editMode={true} />;
 
 export default UpdatePost;
