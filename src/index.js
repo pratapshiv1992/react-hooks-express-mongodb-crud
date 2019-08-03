@@ -2,6 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
+const handleSubmit = (event)=> {
+    fetch(`/post/listing`)
+    .then(response =>{
+            const result = response.json();
+            console.log('---result---',result);
+    })
+    .catch(e => console.log('oops ...something went wrong',e));
+}
+
+handleSubmit()
+
 const App = ({message})=><>{message}</>
 
 ReactDOM.render(<App message="Hello, this is a basic react app.." />, document.getElementById("root"));

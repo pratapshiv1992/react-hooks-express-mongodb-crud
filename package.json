@@ -4,11 +4,14 @@
   "description": "post-on-it is an app build with ReactJS , NodeJS, Express, MongoDb, Material-UI and Firebase ",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./src/server.js --exec babel-node --presets babel-preset-env",
+    "start": "react-scripts start",
+    "server": "nodemon ./src/server.js --exec babel-node --presets babel-preset-env",
     "eject": "react-scripts eject",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel --presets es2015 -d lib/ src"
+    "build": "babel --presets es2015 -d lib/ src",
+    "dev": "run-p server start"
   },
+  "proxy": "http://localhost:4000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pratapshiv1992/post-on-it.git"
@@ -44,8 +47,12 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "8.0.5",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "express-pino-logger": "^4.0.0",
+    "node-env-run": "^3.0.2",
+    "npm-run-all": "^4.1.5",
+    "pino-colada": "^1.4.4"
   }
 }
