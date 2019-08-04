@@ -175,10 +175,9 @@ MyTable.defaultProps = {
 
 const CreateTable = withStyles(styles)(MyTable);
 
-const PostListing = (props) =>  {
+const PostListing = ({ history:{push}}) =>  {
     const [postList, setPostList] = useState([]);
     const [open,setDialog] = useState(false);
-    const { history:{push}} = props;
     const params = {
         url: '/post/listing',
         method: "get",
