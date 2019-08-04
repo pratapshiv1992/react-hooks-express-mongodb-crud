@@ -61,8 +61,8 @@ const LinkData = [{
     to:'/about-dev',
 }];
 
-const MyLink = props =>{
-    return <RouterLink to={props.to} {...props} />
+const MyLink = ({to, ...others }) =>{
+    return <RouterLink to={to} {...others} />
 }
 
 const AllLinks = ({classes})=>{
