@@ -64,18 +64,19 @@ const CreatePost = (props)=> {
         }
     },[]);
 
-    const handleSubmit = (e,{url,method})=>{
+    const handleSubmit = (e,{url,method},actionType)=>{
         e.preventDefault();
+        if(actionType && actionType === 'DELETE'){
+            method = 'delete';
+        }
         if(text){
             callAPi({
                 url,
                 method,
                 data:{text}
             }).then((result)=>{
-                if(result.status=== 200){
                     alert('operation successfull');
                     push('/');
-                }
             })
         }else{
             alert('Please fill all the required field');
@@ -119,7 +120,7 @@ const CreatePost = (props)=> {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={(e)=>handleSubmit(e,params)}
+                      onClick={(e)=>handleSubmit(e,params,"DELETE")}
                       disabled = {!text}
                     >
                         {editMode ? 'DELETE ':'ADD' }
