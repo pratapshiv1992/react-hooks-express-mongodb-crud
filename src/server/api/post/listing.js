@@ -1,9 +1,9 @@
 import Q from 'q';
 import {Post} from '../../schema/index';
 
-const listing = ()=> {
+const listing = (data)=> {
     const deferred = Q.defer();
-    Post.find({}, (err, posts) => {
+    Post.find(data, (err, posts) => {
         if (err) deferred.reject(err);
         deferred.resolve(posts);
     });
@@ -11,5 +11,9 @@ const listing = ()=> {
 }
 
 export default (req, res)=> {
-    listing().then(posts => res.status(200).json(posts)).catch(() => res.sendStatus(422));
+    let {id} = req.query, data = {};
+    if(id){
+        data['_id'] = id;
+    }
+    listing(data).then(posts => res.status(200).json(posts)).catch(() => res.sendStatus(422));
 }

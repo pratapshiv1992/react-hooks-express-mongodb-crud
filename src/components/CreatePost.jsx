@@ -39,7 +39,8 @@ const styles = theme => ({
 });
 
 const CreatePost = (props)=> {
-    const [text, setTextFn] = useState();
+    const [state, setState] = useState({text:null,createdAt:null,like:null});
+    const {text,createdAt,like} = state;
     const {classes, editMode, match:{params:{id}}, history:{ goBack,push}} = props;
     const params = {
         url: editMode ? `/post/update/${id}` : "/post/create",
@@ -48,7 +49,18 @@ const CreatePost = (props)=> {
 
     useEffect(()=>{
         if(editMode){
-            console.log('edit mode');
+            callAPi({
+                url:`/post/listing?id=${id}`,
+                method:'get',
+            }).then((result)=>{
+                if(result.status=== 200){
+                    const {data} = result;
+                    const [object] = data;
+                    setState({
+                        ...object
+                    });
+                }
+            })
         }
     },[]);
 
@@ -60,7 +72,7 @@ const CreatePost = (props)=> {
                 method,
                 data:{text}
             }).then((result)=>{
-                if(result.status){
+                if(result.status=== 200){
                     alert('operation successfull');
                     push('/');
                 }
@@ -79,16 +91,17 @@ const CreatePost = (props)=> {
                         id="outlined-simple-start-adornment"
                         className={classNames(classes.margin, classes.textField)}
                         variant="outlined"
-                        label={ editMode ? "Update Post" : "Write post"}
+                        label={ editMode ? "" : "Write post"}
+                        name="text"
                         value={text}
-                        onChange={({target:{value}})=>setTextFn(value)}
+                        onChange={({target:{value,name}})=>setState({...state,[name]:value})}
                         fullWidth
                         multiline={true}
                         rows={6}
                         rowsMax={8}
                     />
-                    { editMode && <Typography variant="h5" component="h5" style={{paddingLeft:"16px"}} > Likes : {0}</Typography> }
-                    { editMode && <Typography variant="h5" component="h5" style={{paddingLeft:"16px"}}> Created on :  {new Date().toLocaleString()}</Typography> }
+                    { editMode && <Typography variant="h5" component="h5" style={{paddingLeft:"16px"}} > Likes : {like}</Typography> }
+                    { editMode && <Typography variant="h5" component="h5" style={{paddingLeft:"16px"}}> Created on :  {new Date(createdAt).toGMTString()}</Typography> }
 
                     { editMode &&
                     <Button
