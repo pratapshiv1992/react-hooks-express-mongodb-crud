@@ -3,13 +3,17 @@
 # This repo teaches about react hooks, react-router-dom, material-ui, express, mongodb, and other babel stuffs.
   It is a basic single page application with crud functionality achieved by using above things.
 
-# Prerequisites
-nodejs
-npm
-mongoDb
+## Prerequisites
+* [NodeJs](https://nodejs.org/en/download/)
+* [MongoDB](https://www.mongodb.com/download-center/community)
 
-# Installation
-clone the repository - git clone https://github.com/pratapshiv1992/react-hooks-express-mongodb-crud.git
-go to the root directory and do npm install .
-now do command run npm dev
+## Installing
+
+```bash
+git clone https://github.com/pratapshiv1992/react-hooks-express-mongodb-crud.git
+cd react-hooks-express-mongodb-crud
+npm install
+npm run dev
+```
+
 
