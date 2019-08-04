@@ -212,19 +212,19 @@ const PostListing = (props) =>  {
                         {
                             width: 30,
                             flexGrow: 0.25,
-                            label: "id",
+                            label: "Id",
                             dataKey: "_id"
                         },
                         {
                             width: 30,
                             flexGrow: 0.25,
-                            label: "text",
+                            label: "Post",
                             dataKey: "text"
                         },
                         {
                             width: 30,
                             flexGrow: 0.25,
-                            label: "like",
+                            label: "Like",
                             dataKey: "like",
                             numeric: true
                         },
