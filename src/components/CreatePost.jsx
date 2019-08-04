@@ -66,7 +66,7 @@ const CreatePost = (props)=> {
 
     const handleSubmit = (e,{url,method},actionType)=>{
         e.preventDefault();
-        if(actionType && actionType === 'DELETE'){
+        if(editMode && actionType && actionType === 'DELETE'){
             method = 'delete';
         }
         if(text){
