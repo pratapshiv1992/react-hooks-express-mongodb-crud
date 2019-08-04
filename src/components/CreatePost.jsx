@@ -57,13 +57,12 @@ const defaultState = {
     like:null
 };
 
-const CreatePost = (props)=> {
+const CreatePost = ({classes,editMode,match:{params:{id}},history:{goBack,push}})=> {
     const [state, setState] = useState(defaultState);
     const [open,setDialog] = useState(false);
     const [isFormValueChanged,setFormValueChanged] = useState(false);
     const [hasLiked,setHasLiked] = useState(false);
     const {text,createdAt,like} = state;
-    const {classes, editMode, match:{params:{id}}, history:{ goBack,push}} = props;
     const params = {
         url: editMode ? `/post/update/${id}` : "/post/create",
         method: editMode ? "put" : "post",
