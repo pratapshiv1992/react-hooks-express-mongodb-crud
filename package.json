@@ -1,7 +1,7 @@
 {
-  "name": "post-on-it",
+  "name": "react-hooks-express-mongodb-crud",
   "version": "1.0.0",
-  "description": "post-on-it is an app build with ReactJS , NodeJS, Express, MongoDb, Material-UI and Firebase ",
+  "description": "react-hooks-express-mongodb-crud is a repo build with ReactJS , NodeJS, Express, MongoDb, Material-UI and Firebase ",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -14,12 +14,12 @@
   "proxy": "http://localhost:4000",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pratapshiv1992/post-on-it.git"
+    "url": "git+https://github.com/pratapshiv1992/react-hooks-express-mongodb-crud.git"
   },
   "author": "Shiv pratap singh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pratapshiv1992/post-on-it/issues"
+    "url": "https://github.com/pratapshiv1992/react-hooks-express-mongodb-crud/issues"
   },
   "homepage": "https://post-on-it.firebaseapp.com/",
   "dependencies": {
