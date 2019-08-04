@@ -189,7 +189,8 @@ const PostListing = (props) =>  {
     useEffect(()=>{
             callAPi(params).then((result)=>{
                 if(result.status=== 200){
-                    const {data} = result;
+                    let {data} = result;
+                    data = data.map(o=>({...o,createdAt:new Date(o.createdAt).toGMTString()}));
                     setState({
                         ...state,
                         postList:data

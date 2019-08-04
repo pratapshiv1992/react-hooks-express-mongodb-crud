@@ -8,7 +8,7 @@
     "server": "nodemon ./src/server/index.js --exec babel-node --presets babel-preset-env",
     "eject": "react-scripts eject",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel --presets es2015 -d lib/ src",
+    "build": "react-scripts build",
     "dev": "run-p server start"
   },
   "proxy": "http://localhost:4000",

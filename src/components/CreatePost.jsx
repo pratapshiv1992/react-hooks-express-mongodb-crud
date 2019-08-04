@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {callAPi} from '../utils/callApi';
+import InfoDialog from '../common/InfoDialog';
 
 const styles = theme => ({
     root: {
@@ -38,8 +39,15 @@ const styles = theme => ({
     }
 });
 
+const defaultState = {
+    text:null,
+    createdAt:null,
+    like:null
+};
+
 const CreatePost = (props)=> {
-    const [state, setState] = useState({text:null,createdAt:null,like:null});
+    const [state, setState] = useState(defaultState);
+    const [open,setDialog] = useState(false);
     const {text,createdAt,like} = state;
     const {classes, editMode, match:{params:{id}}, history:{ goBack,push}} = props;
     const params = {
@@ -64,19 +72,27 @@ const CreatePost = (props)=> {
         }
     },[]);
 
-    const handleSubmit = (e,{url,method},actionType)=>{
+    const handleSubmit = (e,{url,method},actionType)=> {
         e.preventDefault();
-        if(editMode && actionType && actionType === 'DELETE'){
+        const isDeleteOperation = editMode && actionType && actionType === 'DELETE';
+        if(isDeleteOperation){
             method = 'delete';
         }
-        if(text){
+        method = isDeleteOperation ? 'delete' : method;
+        if(text || isDeleteOperation){
             callAPi({
                 url,
                 method,
                 data:{text}
-            }).then((result)=>{
-                    alert('operation successfull');
+            }).then((result)=> {
+                if(isDeleteOperation){
+                    method = 'delete';
+                }
+                setDialog(true);
+                setTimeout(()=> {
+                    setDialog(false);
                     push('/');
+                },1500);
             })
         }else{
             alert('Please fill all the required field');
@@ -111,6 +127,7 @@ const CreatePost = (props)=> {
                       color="primary"
                       className={classes.button}
                       onClick={(e)=>handleSubmit(e,params)}
+                      disabled = {!text}
                     >
                         Update
                     </Button>
@@ -134,6 +151,12 @@ const CreatePost = (props)=> {
                         GO BACK
                     </Button>
                 </form>
+                <InfoDialog
+                    open={open}
+                    handleClose={(e)=>setDialog(false)}
+                    title={"Message"}
+                    text={'Operation Successfully Completed'}
+                />
             </div>
         );
 }
