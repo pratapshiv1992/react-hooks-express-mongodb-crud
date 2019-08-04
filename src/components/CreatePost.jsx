@@ -78,16 +78,12 @@ const CreatePost = (props)=> {
         if(isDeleteOperation){
             method = 'delete';
         }
-        method = isDeleteOperation ? 'delete' : method;
         if(text || isDeleteOperation){
             callAPi({
                 url,
                 method,
                 data:{text}
             }).then((result)=> {
-                if(isDeleteOperation){
-                    method = 'delete';
-                }
                 setDialog(true);
                 setTimeout(()=> {
                     setDialog(false);
@@ -155,7 +151,7 @@ const CreatePost = (props)=> {
                     open={open}
                     handleClose={(e)=>setDialog(false)}
                     title={"Message"}
-                    text={'Operation Successfully Completed'}
+                    text={"Operation Successfully Completed"}
                 />
             </div>
         );

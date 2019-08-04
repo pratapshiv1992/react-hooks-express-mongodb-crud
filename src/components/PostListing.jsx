@@ -7,6 +7,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { AutoSizer, Column, SortDirection, Table } from "react-virtualized";
 import {callAPi} from '../utils/callApi'
+import InfoDialog from '../common/InfoDialog';
 
 const styles = theme => ({
     table: {
@@ -175,11 +176,8 @@ MyTable.defaultProps = {
 const CreateTable = withStyles(styles)(MyTable);
 
 const PostListing = (props) =>  {
-    const [state, setState] = useState({
-        postList:[],
-        open:false
-    });
-    const { postList, open } = state;
+    const [postList, setPostList] = useState([]);
+    const [open,setDialog] = useState(false);
     const { history:{push}} = props;
     const params = {
         url: '/post/listing',
@@ -191,10 +189,11 @@ const PostListing = (props) =>  {
                 if(result.status=== 200){
                     let {data} = result;
                     data = data.map(o=>({...o,createdAt:new Date(o.createdAt).toGMTString()}));
-                    setState({
-                        ...state,
-                        postList:data
-                    });
+                    setPostList(data);
+                    setDialog(true);
+                    setTimeout(()=> {
+                        setDialog(false);
+                    },2500);
                 }
             })
     },[]);
@@ -203,14 +202,7 @@ const PostListing = (props) =>  {
         push(`/post/update/${e.rowData['_id']}`);
     }
 
-    const handleClose=(e)=> {
-        setState({
-            ...state,
-            open:false
-        });
-    }
-
-        return (
+    return (
             <Paper style={{ height: 600, width: "100%" }}>
                 <CreateTable
                     rowCount={postList.length}
@@ -244,6 +236,12 @@ const PostListing = (props) =>  {
                             numeric: true
                         }
                     ]}
+                />
+                <InfoDialog
+                    open={open}
+                    handleClose={(e)=>setDialog(false)}
+                    title={"Message"}
+                    text={"Click on the row to edit it"}
                 />
             </Paper>
         );

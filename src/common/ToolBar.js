@@ -57,8 +57,8 @@ const LinkData = [{
     text:'Add Post',
     to:'/post/create',
 },{
-    text:'Github Repo',
-    to:'/about-developer',
+    text:'About Dev',
+    to:'/about-dev',
 }];
 
 const MyLink = props =>{
