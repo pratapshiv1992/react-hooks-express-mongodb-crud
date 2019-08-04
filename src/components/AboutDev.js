@@ -15,27 +15,17 @@ const styles = theme => ({
 
 const linkedin = 'https://www.linkedin.com/in/pratapshiv1992/';
 const github =   'https://github.com/pratapshiv1992/';
-const repo =   'https://github.com/pratapshiv1992/post-on-it';
+const repo =   'https://github.com/pratapshiv1992/react-hooks-express-mongodb-crud';
 
-function AboutDev(props) {
-    const { classes } = props;
-
+function AboutDev({classes}) {
     return (
         <div className={classes.link}>
             <Typography>
-                <Link href={linkedin} className={classes.link} block underline='always' _blank >
-                    Linkedin
-                </Link>
-                <Link href={github}  className={classes.link} block underline='always' _blank>
-                    Github Profile
-                </Link>
+                <Link href={linkedin} className={classes.link} block underline='always' _blank >Linkedin</Link>
+                <Link href={github}  className={classes.link} block underline='always' _blank>Github Profile</Link>
             </Typography>
-            <Typography>
-                <Link href={repo}  className={classes.link} block underline='always' _blank >Repository link</Link>
-            </Typography>
-            <Typography>
-                Give star and fork this repository if you like it.
-            </Typography>
+            <Typography><Link href={repo}  className={classes.link} block underline='always' _blank >Repository link</Link></Typography>
+            <Typography>Give star and fork this repository if you like it.</Typography>
         </div>
     );
 }
