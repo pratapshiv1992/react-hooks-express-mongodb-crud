@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import config from './config';
-import loadRoutes from './api/index'
+import loadRoutes from './api'
 
 const app = express();
 app.use(morgan('dev'));
