@@ -11,5 +11,5 @@ router.route('/update/:id').put(updatePost).delete(deletePost);
 
 
 export default app => {
-    app.use('/post', router);
+    app.use(router);
 };

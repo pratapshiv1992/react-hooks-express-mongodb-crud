@@ -179,7 +179,7 @@ const PostListing = ({ history:{push}}) =>  {
     const [postList, setPostList] = useState([]);
     const [open,setDialog] = useState(false);
     const params = {
-        url: '/post/listing',
+        url: '/listing',
         method: "get",
     }
 

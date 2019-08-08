@@ -64,14 +64,14 @@ const CreatePost = ({classes,editMode,match:{params:{id}},history:{goBack,push}}
     const [hasLiked,setHasLiked] = useState(false);
     const {text,createdAt,like} = state;
     const params = {
-        url: editMode ? `/post/update/${id}` : "/post/create",
+        url: editMode ? `/update/${id}` : "/create",
         method: editMode ? "put" : "post",
     }
 
     useEffect(()=>{
         if(editMode){
             callAPi({
-                url:`/post/listing?id=${id}`,
+                url:`/listing?id=${id}`,
                 method:'get',
             }).then((result)=>{
                 if(result.status=== 200){
