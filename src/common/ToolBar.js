@@ -66,8 +66,16 @@ const MyLink = ({to, ...others }) =>{
 }
 
 const AllLinks = ({classes})=>{
-    return LinkData.map((link,key)=><Button variant="text" color="primary"  >
-            <Link key={key} component={MyLink} to={link.to} color='textSecondary' underline="none" classes={{root:classes.link}} >{link.text}</Link>
+    return LinkData.map((link,key)=>
+        <Button variant="text" color="primary" key={key.toString()}  >
+            <Link
+                component={MyLink} to={link.to}
+                color='textSecondary'
+                underline="none"
+                classes={{root:classes.link}}
+            >
+                {link.text}
+            </Link>
         </Button>
     )
 }
