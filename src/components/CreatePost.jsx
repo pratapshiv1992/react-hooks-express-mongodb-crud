@@ -52,7 +52,7 @@ const styles = theme => ({
 });
 
 const defaultState = {
-    text:null,
+    text:"",
     createdAt:null,
     like:null
 };
